@@ -129,7 +129,7 @@ The `Dockerfile` simply sets the APP_NAME environment variable and installs the 
 
 ### Logging in a consistent format (JSON) with consistent content
 
-Flask-LogConfig is used as the logging implementation. It is registered in `extensions.py`. There is also a filter that adds the current trace id into each log record from g, and two formatters, one for normal logs and one for audit, that puts the log message into a standard JSON format, than can then be correctly interpreted by both the dev-env and webops ELK stacks. The configuration that tells Python logging to use those formatters and the filter is in `config.py`.
+Flask-LogConfig is used as the logging implementation. It is registered in a custom extension called `enhanced_logging`. There is also a filter that adds the current trace id into each log record from g, and two formatters, one for normal logs and one for audit, that puts the log message into a standard JSON format, than can then be correctly interpreted by both the dev-env and webops ELK stacks. The configuration that tells Python logging to use those formatters and the filter is also set up in `enhanced_logging`.
 
 ### Consistent way to run the application
 
@@ -137,7 +137,7 @@ Flask-LogConfig is used as the logging implementation. It is registered in `exte
 
 `manage.py` contains the app object which is what should be given to a WSGI container such as gunicorn. It is also where Alembic database migration code is to be placed.
 
-All Flask extensions (logging, SQLAlchemy, socketIO etc) are registered in `extensions.py`. First they are created empty, then introduced to the app in the `register_extensions()` method (which is then called by `main.py` during initialisation).
+All Flask extensions (enhanced logging, SQLAlchemy, socketIO etc) shoud be registered in `extensions/register.py`. First they are created empty, then introduced to the app in the `register_extensions()` method (which is then called by `main.py` during initialisation).
 
 ### A Makefile with specific commands to run unit tests and integrations tests
 
@@ -167,7 +167,7 @@ Both handlers are registered in the `register_exception_handlers()` method, whic
 
 ### Consistent environment variable names
 
-All config variables the app uses are created in `config.py`. It is a plain python module - no dict or objects, and no region-specific code. The mandatory variables are `FLASK_LOG_LEVEL` (read by Flask automatically), `COMMIT`, `APP_NAME` (both used in the health route) and `LOGCONFIG` (read by Flask-LogConfig automatically).
+All config variables the app uses are created in `config.py`. It is a plain python module (not a dict or object) and no region-specific code. The mandatory variables are `FLASK_LOG_LEVEL` (read by Flask automatically), `COMMIT` and `APP_NAME` (both used in the health route).
 
 This should be the only place environment variables are read from the underlying OS. It is effectively the gateway into the app for them.
 
