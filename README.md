@@ -129,7 +129,7 @@ The `Dockerfile` simply sets the APP_NAME environment variable and installs the 
 
 ### Logging in a consistent format (JSON) with consistent content
 
-Flask-LogConfig is used as the logging implementation. It is registered in a custom extension called `enhanced_logging`. There is also a filter that adds the current trace id into each log record from g, and two formatters, one for normal logs and one for audit, that puts the log message into a standard JSON format, than can then be correctly interpreted by both the dev-env and webops ELK stacks. The configuration that tells Python logging to use those formatters and the filter is also set up in `enhanced_logging`.
+Flask-LogConfig is used as the logging implementation. It is registered in a custom extension called `enhanced_logging`. There is also a filter that adds the current trace id into each log record from g, and a formatter that puts the log message into a standard JSON format. The message can then be correctly interpreted by both the dev-env and webops ELK stacks. The configuration that tells Python logging to use those formatters and the filter is also set up in `enhanced_logging`.
 
 ### Consistent way to run the application
 
