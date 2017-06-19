@@ -27,7 +27,6 @@ This skeleton is not configured to connect to a database by default. There are s
 * `postgres.py` - copy entire file
 * `general.py` - uncomment postgres leg of code
 
-
 ## Available routes
 
 |Route|What it does|
@@ -98,7 +97,6 @@ These files get added to a test-output folder. The test-output folder is created
 
 You can run these commands in the app's running container via `docker-compose exec flask-skeleton-api <command>` or `exec flask-skeleton-api <command>`. There is also an alias: `unit-test flask-skeleton-api` and `unit-test flask-skeleton-api -r` will run tests and generate reports respectively.
 
-
 ### Integration tests
 
 The integration tests are contained in the integration_tests folder. [Pytest](http://docs.pytest.org/en/latest/) is used for integration testing. To run the tests and output a junit xml use the following command:
@@ -111,7 +109,6 @@ make integrationtest
 This file gets added to the test-output folder. The test-output folder is created if doesn't exist.
 
 To run the integration tests if you are using the common dev-env you can run `docker-compose exec flask-skeleton-api make integrationtest` or, using the alias, `integration-test flask-skeleton-api`.
-
 
 ## Application Framework implementation
 
@@ -137,7 +134,7 @@ Flask-LogConfig is used as the logging implementation. It is registered in a cus
 
 `manage.py` contains the app object which is what should be given to a WSGI container such as gunicorn. It is also where Alembic database migration code is to be placed.
 
-All Flask extensions (enhanced logging, SQLAlchemy, socketIO etc) shoud be registered in `extensions/register.py`. First they are created empty, then introduced to the app in the `register_extensions()` method (which is then called by `main.py` during initialisation).
+All Flask extensions (enhanced logging, SQLAlchemy, socketIO etc) shoud be registered in `extensions.py`. First they are created empty, then introduced to the app in the `register_extensions()` method (which is then called by `main.py` during initialisation).
 
 ### A Makefile with specific commands to run unit tests and integrations tests
 
@@ -153,7 +150,7 @@ Provided by the `after_request()` method in `app.py`. The exact version of the A
 
 ### An X-Trace-ID HTTP header received/generated and then propagated
 
-Provided by the `before_request()` method in `app.py`. If a header of that name is passed in, it extracts it and places it into g for logging (see next section) and also creates a requests Session object with it preset as a header. This allows the same value to propagate throughout the lifetime of a request regardless of how many UIs/APIs it passes through - making debugging and tracing of log messages much easier.
+Provided by the `before_request()` method in `main.py` in the enhanced_logging custom extension. If a header of that name is passed in, it extracts it and places it into g for logging (see next section) and also creates a requests Session object with it preset as a header. This allows the same value to propagate throughout the lifetime of a request regardless of how many UIs/APIs it passes through - making debugging and tracing of log messages much easier.
 
 Note that for the propagation to work, g.requests must be used for making calls to other APIs rather than just requests.
 

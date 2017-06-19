@@ -36,12 +36,12 @@ class EnhancedLogging(object):
             'disable_existing_loggers': False,
             'formatters': {
                 'simple': {
-                    '()': app_module + '.extensions.enhanced_logging.formatters.JsonFormatter'
+                    '()': app_module + '.custom_extensions.enhanced_logging.formatters.JsonFormatter'
                 }
             },
             'filters': {
                 'contextual': {
-                    '()': app_module + '.extensions.enhanced_logging.filters.ContextualFilter'
+                    '()': app_module + '.custom_extensions.enhanced_logging.filters.ContextualFilter'
                 }
             },
             'handlers': {
@@ -65,5 +65,3 @@ class EnhancedLogging(object):
         logger = LogConfig()
 
         logger.init_app(app)
-
-
