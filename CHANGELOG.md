@@ -4,7 +4,7 @@ Note that requirements updates are not listed here unless they result in more ch
 
 |Date|Summary|Comparison to previous|
 |---|---|---|
-|2017-06-30|Move logging and traceid code into an app-agnostic custom extension| [Here](http://192.168.249.38/skeletons/flask-skeleton-api/commit/b4405c9389e7173511b6dd5d9f530942310e719b)|
+|2017-06-30|Move logging and traceid code into an app-agnostic custom extension| [Here](http://192.168.249.38/skeletons/flask-skeleton-api/commit/ddf0e6d2b2e8060fd0460521e427e7d853a7d8be)|
 |2017-04-20|BugFix: Exception responses now return `application/json` mimetype.| [Here](http://192.168.249.38/skeletons/flask-skeleton-api/commit/244abe82bfa89a4864e1f1000181da32e0ea38be)|
 |2017-04-11|BugFix: Cascading health route updated to no longer always return a status of OK.| [Here](http://192.168.249.38/skeletons/flask-skeleton-api/compare/fb43404b39a843fa0ae4c49efb51716178cf7cf4...7744e96b4b8250fbf0f9609b4a9923154dd852c3) |
 |2017-04-07|Dockerfile updated to use base Flask image version 3| [Here](http://192.168.249.38/skeletons/flask-skeleton-api/commit/40754a1825169d2f2c3f534c79bd4afe82dbe8d5) |
