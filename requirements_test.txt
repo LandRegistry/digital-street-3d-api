@@ -4,3 +4,4 @@ coverage==4.3.4
 flake8==3.3.0
 hacking==0.13.0
 pep8-naming==0.4.1
+pip-tools==1.9.0

@@ -34,8 +34,11 @@ This skeleton is not configured to connect to a database by default. There are s
 |**GET** /health|Returns some basic information about the app (JSON)|
 |**GET** /health/cascade/\<depth\>|Returns the app's health information as above but also the health information of any database and HTTP dependencies, down to the specified depth (JSON)|
 
-## Quick start
+## Requirements management
 
+The only (non-test related) requirements that should be changed by hand are those in `requirements.in`. They are the top -level requirements that are directly used by the application. When one of these is updated, the tool `pip-compile` should be used to generate a full requirements.txt that contains all sub-dependencies, pinned to whatever version is available at the time. Both files should be in source control. See [TechDocs](http://techdocs.dev.ctp.local/index.php/Requirements_management) for further explanation.
+
+## Quick start
 
 ### Docker
 
