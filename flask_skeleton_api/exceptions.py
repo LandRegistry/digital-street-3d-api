@@ -1,5 +1,6 @@
 from flask import Response, current_app
 import json
+import traceback
 
 
 class ApplicationError(Exception):
@@ -44,9 +45,14 @@ def unhandled_exception(e):
     no opportunity for cleanup or error handling in the processing code, this should be a never-event!
     """
     current_app.logger.exception('Unhandled Exception: %s', repr(e))
-    return Response(response=json.dumps({"error_message": "Internal Server Error", "error_code": "500"}),
-                    mimetype='application/json',
-                    status=500)
+
+    response_dict = {"error_message": "Internal Server Error", "error_code": "500"}
+
+    # If we are logging at debug level, also return the stack trace for greater visibility
+    if current_app.config.get('FLASK_LOG_LEVEL', 'INFO').upper() == 'DEBUG':
+        response_dict['stacktrace'] = traceback.format_exc()
+
+    return Response(response=json.dumps(response_dict), mimetype='application/json', status=500)
 
 
 def application_error(e):
@@ -60,9 +66,14 @@ def application_error(e):
     else:
         current_app.logger.debug('Application Exception (message: %s, code: %s): %s', e.message, e.code, repr(e),
                                  exc_info=True)
-    return Response(response=json.dumps({"error_message": e.message, "error_code": e.code}),
-                    mimetype='application/json',
-                    status=e.http_code)
+
+    response_dict = {"error_message": e.message, "error_code": e.code}
+
+    # If we are logging at debug level, also return the stack trace for greater visibility
+    if current_app.config.get('FLASK_LOG_LEVEL', 'INFO').upper() == 'DEBUG':
+        response_dict['stacktrace'] = traceback.format_exc()
+
+    return Response(response=json.dumps(response_dict), mimetype='application/json', status=e.http_code)
 
 
 def register_exception_handlers(app):
