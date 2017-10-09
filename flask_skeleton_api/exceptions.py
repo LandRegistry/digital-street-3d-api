@@ -14,10 +14,10 @@ class ApplicationError(Exception):
 
     or
 
-    raise ApplicationError("Title number invalid", "E102", http_code=400, force_error_log=True)
+    raise ApplicationError("Title number invalid", "E102", http_code=400, force_logging=True)
     """
 
-    def __init__(self, message, code, http_code=500, force_error_log=False):
+    def __init__(self, message, code, http_code=500, force_logging=False):
         """Create an instance of the error.
 
         Keyword arguments:
@@ -25,14 +25,14 @@ class ApplicationError(Exception):
         http_code - handler methods will use this to determine the http code to set in the returned Response
         (default 500)
 
-        force_error_log - handler methods will use this to determine whether to log at debug or error, when
-        the http code being returned is not 500 (500s are always considered live-log worthy) (default False)
+        force_logging - handler methods will use this to determine whether to log at debug or info, when
+        the http code being returned is not 500 (500s are always considered error-level worthy) (default False)
         """
         Exception.__init__(self)
         self.message = message
         self.http_code = http_code
         self.code = code
-        self.force_error_log = force_error_log
+        self.force_logging = force_logging
 
 
 def unhandled_exception(e):
@@ -59,9 +59,13 @@ def application_error(e):
 
     A consistent JSON bodied response is returned.
     """
-    # If http code is 500 or it has been specifically requested, log at ERROR level
-    if e.http_code == 500 or e.force_error_log:
+    # Determine whether to log at info|error, when the http code being returned is not 500
+    # (500s are always considered live-log worthy, at error level)
+    if e.http_code == 500:
         current_app.logger.exception('Application Exception (message: %s, code: %s): %s', e.message, e.code, repr(e))
+    elif e.force_logging:
+        current_app.logger.info('Application Exception (message: %s, code: %s): %s', e.message, e.code, repr(e),
+                                exc_info=True)
     else:
         current_app.logger.debug('Application Exception (message: %s, code: %s): %s', e.message, e.code, repr(e),
                                  exc_info=True)
