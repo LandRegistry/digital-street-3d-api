@@ -1,5 +1,5 @@
 # Set the base image to the base image
-FROM hmlandregistry/dev_base_python_flask:3
+FROM hmlandregistry/dev_base_python_flask:4
 
 # Using SQLAlchemy/Postgres?
 # See how the required env vars are set here:
@@ -9,8 +9,9 @@ FROM hmlandregistry/dev_base_python_flask:3
 # Put your app-specific stuff here (extra yum installs etc).
 # Any unique environment variables your config.py needs should also be added as ENV entries here
 
-ENV APP_NAME flask-skeleton-api
-ENV MAX_HEALTH_CASCADE 6
+ENV APP_NAME=flask-skeleton-api \
+ MAX_HEALTH_CASCADE=6 \
+ LOG_LEVEL=DEBUG
 
 # ----
 
