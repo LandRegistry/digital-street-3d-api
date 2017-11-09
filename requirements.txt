@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-certifi==2017.7.27.1      # via requests
+certifi==2017.11.5        # via requests
 chardet==3.0.4            # via requests
 click==6.7                # via flask
 flask-logconfig==0.4.2
@@ -12,7 +12,7 @@ flask-script==2.0.6
 flask==0.12.2             # via flask-logconfig, flask-script
 idna==2.6                 # via requests
 itsdangerous==0.24        # via flask
-jinja2==2.9.6             # via flask
+jinja2==2.10              # via flask
 logconfig==0.4.0          # via flask-logconfig
 logutils==0.3.5           # via logconfig
 markupsafe==1.0           # via jinja2
