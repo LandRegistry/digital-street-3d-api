@@ -1,4 +1,5 @@
 import os
+
 # RULES OF CONFIG:
 # 1. No region specific code. Regions are defined by setting the OS environment variables appropriately to build up the
 # desired behaviour.
@@ -15,7 +16,7 @@ COMMIT = os.environ['COMMIT']
 # This APP_NAME variable is to allow changing the app name when the app is running in a cluster. So that
 # each app in the cluster will have a unique name.
 APP_NAME = os.environ['APP_NAME']
-MAX_HEALTH_CASCADE = os.environ['MAX_HEALTH_CASCADE']
+MAX_HEALTH_CASCADE = int(os.environ['MAX_HEALTH_CASCADE'])
 
 # Following is an example of building the dependency structure used by the cascade route
 # SELF can be used to demonstrate how it works (i.e. it will call it's own casecade
@@ -26,4 +27,3 @@ MAX_HEALTH_CASCADE = os.environ['MAX_HEALTH_CASCADE']
 # Using SQLAlchemy/Postgres?
 # The required variables (and required usage) can be found here:
 # http://192.168.249.38/gadgets/gadget-api/blob/master/gadget_api/config.py
-
