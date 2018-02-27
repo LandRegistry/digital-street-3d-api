@@ -3,7 +3,7 @@ FROM hmlandregistry/dev_base_python_flask:4
 
 # Using SQLAlchemy/Postgres?
 # See how the required env vars are set here:
-# http://192.168.249.38/gadgets/gadget-api/blob/master/Dockerfile
+# http://git.dev.ctp.local/gadgets/gadget-api/blob/master/Dockerfile
 
 # ----
 # Put your app-specific stuff here (extra yum installs etc).

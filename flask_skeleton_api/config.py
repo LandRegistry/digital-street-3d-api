@@ -26,4 +26,4 @@ MAX_HEALTH_CASCADE = int(os.environ['MAX_HEALTH_CASCADE'])
 
 # Using SQLAlchemy/Postgres?
 # The required variables (and required usage) can be found here:
-# http://192.168.249.38/gadgets/gadget-api/blob/master/gadget_api/config.py
+# http://git.dev.ctp.local/gadgets/gadget-api/blob/master/gadget_api/config.py

@@ -6,7 +6,7 @@ from flask_skeleton_api.main import app
 
 # Using Alembic?
 # See what extra lines are needed here:
-# http://192.168.249.38/gadgets/gadget-api/blob/master/manage.py
+# http://git.dev.ctp.local/gadgets/gadget-api/blob/master/manage.py
 
 manager = Manager(app)
 
