@@ -1,6 +1,7 @@
-from flask import Response, current_app
 import json
 import traceback
+
+from flask import Response, current_app
 
 
 class ApplicationError(Exception):
@@ -45,13 +46,14 @@ def unhandled_exception(e):
     """
     current_app.logger.exception('Unhandled Exception: %s', repr(e))
 
-    response_dict = {"error_message": "Internal Server Error", "error_code": "500"}
+    response_dict = {
+        "error_message": "Internal Server Error", "error_code": "500"}
 
     # If we are logging at debug level, also return the stack trace for greater visibility
     if current_app.config.get('FLASK_LOG_LEVEL', 'INFO').upper() == 'DEBUG':
         response_dict['stacktrace'] = traceback.format_exc()
 
-    return Response(response=json.dumps(response_dict), mimetype='application/json', status=500)
+    return Response(response=json.dumps(response_dict, separators=(',', ':')), mimetype='application/json', status=500)
 
 
 def application_error(e):
@@ -62,7 +64,8 @@ def application_error(e):
     # Determine whether to log at info|error, when the http code being returned is not 500
     # (500s are always considered live-log worthy, at error level)
     if e.http_code == 500:
-        current_app.logger.exception('Application Exception (message: %s, code: %s): %s', e.message, e.code, repr(e))
+        current_app.logger.exception(
+            'Application Exception (message: %s, code: %s): %s', e.message, e.code, repr(e))
     elif e.force_logging:
         current_app.logger.info('Application Exception (message: %s, code: %s): %s', e.message, e.code, repr(e),
                                 exc_info=True)
@@ -76,7 +79,8 @@ def application_error(e):
     if current_app.config.get('FLASK_LOG_LEVEL', 'INFO').upper() == 'DEBUG':
         response_dict['stacktrace'] = traceback.format_exc()
 
-    return Response(response=json.dumps(response_dict), mimetype='application/json', status=e.http_code)
+    return Response(response=json.dumps(response_dict, separators=(',', ':')),
+                    mimetype='application/json', status=e.http_code)
 
 
 def register_exception_handlers(app):

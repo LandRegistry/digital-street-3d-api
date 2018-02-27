@@ -19,4 +19,4 @@ class JsonFormatter(logging.Formatter):
              ('message', record.msg % record.args),
              ('exception', exc)])
 
-        return json.dumps(log_entry)
+        return json.dumps(log_entry, separators=(',', ':'))
