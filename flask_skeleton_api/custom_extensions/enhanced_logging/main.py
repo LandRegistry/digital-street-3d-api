@@ -1,10 +1,9 @@
-from flask import g
-from flask import request
-from flask_logconfig import LogConfig
+import uuid
 from pathlib import Path
 
 import requests
-import uuid
+from flask import g, request
+from flask_logconfig import LogConfig
 
 
 def before_request():

@@ -1,6 +1,9 @@
-from flask_script import Manager
-from flask_skeleton_api.main import app
 import os
+
+from flask_script import Manager
+
+from flask_skeleton_api.main import app
+
 # Using Alembic?
 # See what extra lines are needed here:
 # http://192.168.249.38/gadgets/gadget-api/blob/master/manage.py

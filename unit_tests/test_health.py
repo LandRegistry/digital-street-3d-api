@@ -1,5 +1,6 @@
-from flask_skeleton_api.main import app
 import unittest
+
+from flask_skeleton_api.main import app
 
 
 class TestHealth(unittest.TestCase):
