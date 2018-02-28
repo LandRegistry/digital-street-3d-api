@@ -1,5 +1,4 @@
-from flask_skeleton_api.custom_extensions.enhanced_logging.main import \
-    EnhancedLogging
+from flask_skeleton_api.custom_extensions.enhanced_logging.main import EnhancedLogging
 
 # Create empty extension objects here
 enhanced_logging = EnhancedLogging()
