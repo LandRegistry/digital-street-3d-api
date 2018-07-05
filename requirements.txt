@@ -9,14 +9,14 @@ chardet==3.0.4            # via requests
 click==6.7                # via flask
 flask-logconfig==0.4.2
 flask-script==2.0.6
-flask==0.12.2
-idna==2.6                 # via requests
+flask==0.12.4
+idna==2.7                 # via requests
 itsdangerous==0.24        # via flask
 jinja2==2.10              # via flask
 logconfig==0.4.0          # via flask-logconfig
 logutils==0.3.5           # via logconfig
 markupsafe==1.0           # via jinja2
 pyyaml==3.12              # via logconfig
-requests==2.18.4
-urllib3==1.22             # via requests
+requests==2.19.1
+urllib3==1.23             # via requests
 werkzeug==0.14.1          # via flask
