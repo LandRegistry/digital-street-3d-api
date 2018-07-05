@@ -100,7 +100,7 @@ def cascade_health(depth):
                     services.append(service)
     response_json = {
         "cascade_depth": depth,
-        "server_timestamp": str(datetime.datetime.utcnow()),
+        "server_timestamp": str(datetime.datetime.now()),
         "app": current_app.config.get("APP_NAME"),
         "status": "UNKNOWN",
         "headers": request.headers.to_list(),
