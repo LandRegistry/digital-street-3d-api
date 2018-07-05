@@ -3,7 +3,7 @@
 This repository contains a Python3-based Flask application structured in the way that all
 Land Registry Flask APIs should be structured going forwards.
 
-See the [Application Framework](http://192.168.250.79/index.php/Application_Framework) TechDocs page for a description of the features these skeletons provide and links to some reference implementations.
+See the [Application Framework](http://techdocs.dev.ctp.local/index.php/Application_Framework) TechDocs page for a description of the features these skeletons provide and links to some reference implementations.
 
 ## Changes
 
@@ -12,11 +12,11 @@ See the [Application Framework](http://192.168.250.79/index.php/Application_Fram
 ## Usage
 
 You can use this to create your own app.
-Take a copy of all the files, and change all occurences of `flask-skeleton-api` and `flask_skeleton_api` to your app name - including folders! There will be other places to tweak too such as the exposed port in docker-compose-fragment, so please look through every file before starting to extend it for your own use. There is a [more comprehensive guide](http://192.168.250.79/index.php/Diary_-_Creating_a_New_Application) available on TechDocs.
+Take a copy of all the files, and change all occurences of `flask-skeleton-api` and `flask_skeleton_api` to your app name - including folders! There will be other places to tweak too such as the exposed port in docker-compose-fragment, so please look through every file before starting to extend it for your own use. There is a [more comprehensive guide](http://techdocs.dev.ctp.local/index.php/Diary_-_Creating_a_New_Application) available on TechDocs.
 
 ### Adding database connectivity
 
-This skeleton is not configured to connect to a database by default. There are several changes/additions that should be made for it to work, listed below. Code to copy can be found in the reference implementation [gadget-api](http://192.168.249.38/gadgets/gadget-api/tree/master).
+This skeleton is not configured to connect to a database by default. There are several changes/additions that should be made for it to work, listed below. Code to copy can be found in the reference implementation [gadget-api](http://git.dev.ctp.local/gadgets/gadget-api/tree/master).
 
 * `postgres-init-fragment.sql` - Copy entire file and change it so your own database and user are defined
 * `configuration.yml` - add postgres into the commodities list
@@ -38,11 +38,11 @@ This skeleton is not configured to connect to a database by default. There are s
 
 ### Docker
 
-This app supports the [universal dev-env](192.168.249.38/common/dev-env) so adding the following to your dev-env config file is enough:
+This app supports the [universal dev-env](git.dev.ctp.local/common/dev-env) so adding the following to your dev-env config file is enough:
 
 ```YAML
   flask-skeleton-api:
-    repo: git@192.168.249.38:skeletons/flask-skeleton-api.git
+    repo: git@git.dev.ctp.local:skeletons/flask-skeleton-api.git
     branch: master
 ```
 
@@ -111,7 +111,7 @@ To run the integration tests if you are using the common dev-env you can run `do
 
 ## Application Framework implementation
 
-Although you should inspect every file and understand how the app is put together, here is a high level list of how the [Application Framework](http://192.168.250.79/index.php/Application_Framework) standard structure and behaviours are implemented:
+Although you should inspect every file and understand how the app is put together, here is a high level list of how the [Application Framework](http://techdocs.dev.ctp.local/index.php/Application_Framework) standard structure and behaviours are implemented:
 
 ### Universal Development Envionment support
 
@@ -175,4 +175,4 @@ Blueprints are registered in the `register_blueprints` method in `blueprints.py`
 
 ### Concise and clear requirements management
 
-The only (non-test related) requirements that should be changed by hand are those in `requirements.in`. They are the top -level requirements that are directly used by the application. When one of these is updated, the tool `pip-compile` should be used to generate a full requirements.txt that contains all sub-dependencies, pinned to whatever version is available at the time. Both files should be in source control. See [TechDocs](http://techdocs.dev.ctp.local/index.php/Requirements_management) for further explanation.
+The only (non-test related) requirements that should be changed by hand are those in `requirements.in`. They are the top -level requirements that are directly used by the application. When one of these is updated, the tool `pip-compile` should be used to generate a full requirements.txt that contains all sub-dependencies, pinned to whatever version is available at the time. Both files should be in source control. See [TechDocs](http://techdocs.dev.ctp.localindex.php/Requirements_management) for further explanation.

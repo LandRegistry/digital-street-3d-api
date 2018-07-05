@@ -1,6 +1,6 @@
-from flask import ctx
-from flask import g
 import logging
+
+from flask import ctx, g
 
 
 class ContextualFilter(logging.Filter):

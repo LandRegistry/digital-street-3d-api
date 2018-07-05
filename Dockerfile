@@ -3,15 +3,15 @@ FROM hmlandregistry/dev_base_python_flask:4
 
 # Using SQLAlchemy/Postgres?
 # See how the required env vars are set here:
-# http://192.168.249.38/gadgets/gadget-api/blob/master/Dockerfile
+# http://git.dev.ctp.local/gadgets/gadget-api/blob/master/Dockerfile
 
 # ----
 # Put your app-specific stuff here (extra yum installs etc).
 # Any unique environment variables your config.py needs should also be added as ENV entries here
 
-ENV APP_NAME=flask-skeleton-api \
- MAX_HEALTH_CASCADE=6 \
- LOG_LEVEL=DEBUG
+ENV APP_NAME="flask-skeleton-api" \
+ MAX_HEALTH_CASCADE="6" \
+ LOG_LEVEL="DEBUG"
 
 # ----
 

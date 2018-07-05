@@ -1,7 +1,9 @@
-pytest==3.4.0
-pytest-cov==2.5.1
 coverage==4.5.1
 flake8==3.5.0
-hacking==1.0.0
-pep8-naming==0.5.0
-pip-tools==1.11.0
+hacking==1.1.0
+pep8-naming==0.7.0
+piprot==0.9.10
+pip-tools==2.0.2
+pytest==3.6.3
+pytest-cov==2.5.1
+safety==1.8.1

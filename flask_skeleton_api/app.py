@@ -1,6 +1,4 @@
-from flask import Flask, g, request
-import uuid
-import requests
+from flask import Flask
 
 app = Flask(__name__)
 
