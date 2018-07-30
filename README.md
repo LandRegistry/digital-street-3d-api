@@ -57,6 +57,8 @@ The Docker image it creates (and runs) will install all necessary requirements a
 * LOG_LEVEL
 * COMMIT
 * APP_NAME
+* MAX_HEALTH_CASCADE
+* DEFAULT_TIMEOUT
 
 ##### When not using gunicorn
 
