@@ -2,8 +2,15 @@ import uuid
 from pathlib import Path
 
 import requests
-from flask import g, request
+from flask import current_app, g, request
 from flask_logconfig import LogConfig
+
+
+class RequestsSessionTimeout(requests.Session):
+    def request(self, *args, **kwargs):
+        if not kwargs.get('timeout'):
+            kwargs['timeout'] = current_app.config['DEFAULT_TIMEOUT']
+        return super(RequestsSessionTimeout, self).request(*args, **kwargs)
 
 
 def before_request():

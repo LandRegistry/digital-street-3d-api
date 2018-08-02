@@ -67,7 +67,7 @@ def cascade_health(depth):
                 try:
                     # Try and request the health
                     resp = g.requests.get(
-                        value + 'health/cascade/' + str(depth - 1), timeout=current_app.config.get("DEFAULT_TIMEOUT"))
+                        value + 'health/cascade/' + str(depth - 1))
                 except ConnectionAbortedError as e:  # More specific logging statement for abortion error
                     current_app.logger.error("Connection Aborted during health cascade on attempt to connect to {};"
                                              " full error: {}".format(dependency, e))
