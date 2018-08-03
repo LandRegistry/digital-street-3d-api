@@ -19,7 +19,7 @@ def before_request():
     g.trace_id = request.headers.get('X-Trace-ID', uuid.uuid4().hex)
     # We also create a session-level requests object for the app to use with the header pre-set, so other APIs
     # will receive it. These lines can be removed if the app will not make requests to other LR APIs!
-    g.requests = requests.Session()
+    g.requests = RequestsSessionTimeout()
     g.requests.headers.update({'X-Trace-ID': g.trace_id})
 
 
