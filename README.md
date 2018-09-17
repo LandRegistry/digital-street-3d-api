@@ -58,7 +58,9 @@ The Docker image it creates (and runs) will install all necessary requirements a
 * COMMIT
 * APP_NAME
 * MAX_HEALTH_CASCADE
-* DEFAULT_TIMEOUT
+* DEFAULT_TIMEOUT *(suggested value: 30)*
+
+  *(The default timeout is applied to all calls which go via g.requests but can be overriden on a case by case basis with the standard timeout argument)*
 
 ##### When not using gunicorn
 

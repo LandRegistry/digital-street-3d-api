@@ -7,9 +7,14 @@ from flask_logconfig import LogConfig
 
 
 class RequestsSessionTimeout(requests.Session):
+    """Custom requests session class to set some defaults on g.requests"""
     def request(self, *args, **kwargs):
+        # Set a default timeout for the request.
+        # Can be overridden in the same way that you would normally set a timeout
+        # i.e. g.requests.get(timeout=5)
         if not kwargs.get('timeout'):
             kwargs['timeout'] = current_app.config['DEFAULT_TIMEOUT']
+
         return super(RequestsSessionTimeout, self).request(*args, **kwargs)
 
 
