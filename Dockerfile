@@ -11,7 +11,8 @@ FROM hmlandregistry/dev_base_python_flask:4
 
 ENV APP_NAME="flask-skeleton-api" \
  MAX_HEALTH_CASCADE="6" \
- LOG_LEVEL="DEBUG"
+ LOG_LEVEL="DEBUG" \
+ DEFAULT_TIMEOUT="30"
 
 # ----
 

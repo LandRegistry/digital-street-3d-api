@@ -2,8 +2,20 @@ import uuid
 from pathlib import Path
 
 import requests
-from flask import g, request
+from flask import current_app, g, request
 from flask_logconfig import LogConfig
+
+
+class RequestsSessionTimeout(requests.Session):
+    """Custom requests session class to set some defaults on g.requests"""
+    def request(self, *args, **kwargs):
+        # Set a default timeout for the request.
+        # Can be overridden in the same way that you would normally set a timeout
+        # i.e. g.requests.get(timeout=5)
+        if not kwargs.get('timeout'):
+            kwargs['timeout'] = current_app.config['DEFAULT_TIMEOUT']
+
+        return super(RequestsSessionTimeout, self).request(*args, **kwargs)
 
 
 def before_request():
@@ -12,7 +24,7 @@ def before_request():
     g.trace_id = request.headers.get('X-Trace-ID', uuid.uuid4().hex)
     # We also create a session-level requests object for the app to use with the header pre-set, so other APIs
     # will receive it. These lines can be removed if the app will not make requests to other LR APIs!
-    g.requests = requests.Session()
+    g.requests = RequestsSessionTimeout()
     g.requests.headers.update({'X-Trace-ID': g.trace_id})
 
 

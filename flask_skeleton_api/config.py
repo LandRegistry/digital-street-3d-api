@@ -17,6 +17,7 @@ COMMIT = os.environ['COMMIT']
 # each app in the cluster will have a unique name.
 APP_NAME = os.environ['APP_NAME']
 MAX_HEALTH_CASCADE = int(os.environ['MAX_HEALTH_CASCADE'])
+DEFAULT_TIMEOUT = int(os.environ['DEFAULT_TIMEOUT'])
 
 # Following is an example of building the dependency structure used by the cascade route
 # SELF can be used to demonstrate how it works (i.e. it will call it's own casecade
