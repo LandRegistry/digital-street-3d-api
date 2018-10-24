@@ -37,7 +37,6 @@ class ApplicationError(Exception):
 
 
 def unhandled_exception(e):
-    current_app.logger.debug('UNHANDLED')
     """Handler method for exceptions that escape the route code without being caught.
 
     A consistent JSON bodied response is returned.
@@ -61,7 +60,6 @@ def unhandled_exception(e):
 
 
 def application_error(e):
-    current_app.logger.debug('APPLICATION')
     """Handler method for ApplicationErrors raised for to inform the client of a specific scenario.
 
     A consistent JSON bodied response is returned.
