@@ -1,6 +1,6 @@
 import json
 import traceback
-import werkzeug
+from werkzeug.exceptions import HTTPException
 from flask import Response, current_app
 
 
@@ -44,7 +44,7 @@ def unhandled_exception(e):
     Due to the lack of information available to provide to the client, and the fact there was clearly
     no opportunity for cleanup or error handling in the processing code, this should be a never-event!
     """
-    if isinstance(e, werkzeug.exceptions.NotFound):
+    if isinstance(e, HTTPException):
         return e
 
     current_app.logger.exception('Unhandled Exception: %s', repr(e))
