@@ -4,6 +4,7 @@ Note that requirements updates are not listed here unless they result in more ch
 
 |Date|Summary|Comparison to previous|
 |---|---|---|
+|2019-01-24| Improve exception handling, support github common-dev-env, fix logging with Flask 1.0 | [Here](http://git.dev.ctp.local/skeletons/flask-skeleton-api/commit/013cd44f28611567f9e826055f92153a727f9310)|
 |2018-03-08|Add configurable default timeout to g.requests so that http requests aren't allowed to hang indefintely | [Here](http://git.dev.ctp.local/skeletons/flask-skeleton-api/merge_requests/29) |
 |2018-04-10|Fix `make unittest` command so that it only runs tests in the unit_test folder instead of integration tests as well | [Here](http://git.dev.ctp.local/skeletons/flask-skeleton-api/merge_requests/26) |
 |2018-01-09|Change ApplicationError handling to allow non-500 errors to be logged at info instead of debug if required, and return stack trace in JSON if Flask log level is DEBUG| [Here](http://git.dev.ctp.local/skeletons/flask-skeleton-api/compare/ce36d29d6c66db44d3a8f0f9a2ee73fb93917088...a8f55194d85ca644f267b06b17a83c2f564bdabd)|
