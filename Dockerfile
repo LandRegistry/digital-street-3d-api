@@ -1,5 +1,5 @@
 # Set the base image to the base image
-FROM hmlandregistry/dev_base_python_flask:4
+FROM hmlandregistry/dev_base_python_flask:5
 
 # Using SQLAlchemy/Postgres?
 # See how the required env vars are set here:
