@@ -1,6 +1,6 @@
 import unittest
 
-from flask_skeleton_api.main import app
+from 3d_index_map_api.main import app
 
 
 class TestHealth(unittest.TestCase):

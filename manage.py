@@ -2,7 +2,7 @@ import os
 
 from flask_script import Manager
 
-from flask_skeleton_api.main import app
+from 3d_index_map_api.main import app
 
 # Using Alembic?
 # See what extra lines are needed here:

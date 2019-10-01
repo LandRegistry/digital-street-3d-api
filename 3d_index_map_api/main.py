@@ -1,9 +1,9 @@
 # This file is the entry point.
 # First we import the app object, which will get initialised as we do it. Then import methods we're about to use.
-from flask_skeleton_api.app import app
-from flask_skeleton_api.blueprints import register_blueprints
-from flask_skeleton_api.exceptions import register_exception_handlers
-from flask_skeleton_api.extensions import register_extensions
+from 3d_index_map_api.app import app
+from 3d_index_map_api.blueprints import register_blueprints
+from 3d_index_map_api.exceptions import register_exception_handlers
+from 3d_index_map_api.extensions import register_extensions
 
 # Now we register any extensions we use into the app
 register_extensions(app)
