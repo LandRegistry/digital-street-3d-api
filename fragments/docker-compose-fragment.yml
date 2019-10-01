@@ -1,9 +1,9 @@
 version: '2'
 services:
   # Notice how the service name, container name and repo directory (where the Dockerfile lives) all match.
-  3d-index-map-api:
-    container_name: 3d-index-map-api
-    build: ./3d-index-map-api
+  index-map-3d-api:
+    container_name: index-map-3d-api
+    build: ./index-map-3d-api
     restart: on-failure
     ports:
       # The base Flask Dockerfile tells gunicorn to use 8080 by default, we expose it here and map it to a unique 
@@ -11,7 +11,7 @@ services:
       - "9998:8080"
     volumes:
       # Our convention is (for python) to always map the app files to /src within the container
-      - ./3d-index-map-api:/src
+      - ./index-map-3d-api:/src
     # Redirect all the logs to a logstash server. Logstash is set up to parse RFC5424 format messages.
     logging:
       driver: syslog

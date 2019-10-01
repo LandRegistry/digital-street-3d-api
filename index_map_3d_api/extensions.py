@@ -1,4 +1,4 @@
-from 3d_index_map_api.custom_extensions.enhanced_logging.main import EnhancedLogging
+from index_map_3d_api.custom_extensions.enhanced_logging.main import EnhancedLogging
 
 # Create empty extension objects here
 enhanced_logging = EnhancedLogging()

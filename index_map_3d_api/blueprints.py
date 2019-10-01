@@ -1,5 +1,5 @@
 # Import every blueprint file
-from 3d_index_map_api.views import general
+from index_map_3d_api.views import general
 
 
 def register_blueprints(app):

@@ -1,4 +1,4 @@
-# 3d-index-map-api
+# index-map-3d-api
 
 This repository contains a Python3-based Flask application structured in the way that all
 Land Registry Flask APIs should be structured going forwards.
@@ -12,7 +12,7 @@ See the [Application Framework](http://techdocs.dev.ctp.local/index.php/Applicat
 ## Usage
 
 You can use this to create your own app.
-Take a copy of all the files, and change all occurences of `3d-index-map-api` and `3d_index_map_api` to your app name - including folders! There will be other places to tweak too such as the exposed port in docker-compose-fragment, so please look through every file before starting to extend it for your own use. There is a [more comprehensive guide](http://techdocs.dev.ctp.local/index.php/Diary_-_Creating_a_New_Application) available on TechDocs.
+Take a copy of all the files, and change all occurences of `index-map-3d-api` and `index_map_3d_api` to your app name - including folders! There will be other places to tweak too such as the exposed port in docker-compose-fragment, so please look through every file before starting to extend it for your own use. There is a [more comprehensive guide](http://techdocs.dev.ctp.local/index.php/Diary_-_Creating_a_New_Application) available on TechDocs.
 
 ### Adding database connectivity
 
@@ -41,8 +41,8 @@ This skeleton is not configured to connect to a database by default. There are s
 This app supports the [universal dev-env](git.dev.ctp.local/common/dev-env) so adding the following to your dev-env config file is enough:
 
 ```YAML
-  3d-index-map-api:
-    repo: git@git.dev.ctp.local:skeletons/3d-index-map-api.git
+  index-map-3d-api:
+    repo: git@git.dev.ctp.local:skeletons/index-map-3d-api.git
     branch: master
 ```
 
@@ -64,7 +64,7 @@ The Docker image it creates (and runs) will install all necessary requirements a
 
 ##### When not using gunicorn
 
-* FLASK_APP *(suggested value: 3d_index_map_api/main.py)*
+* FLASK_APP *(suggested value: index_map_3d_api/main.py)*
 * FLASK_DEBUG *(suggested value: 1)*
 
 #### Running (when not using gunicorn)
@@ -98,7 +98,7 @@ make report="true" unittest
 
 These files get added to a test-output folder. The test-output folder is created if doesn't exist.
 
-You can run these commands in the app's running container via `docker-compose exec 3d-index-map-api <command>` or `exec 3d-index-map-api <command>`. There is also an alias: `unit-test 3d-index-map-api` and `unit-test 3d-index-map-api -r` will run tests and generate reports respectively.
+You can run these commands in the app's running container via `docker-compose exec index-map-3d-api <command>` or `exec index-map-3d-api <command>`. There is also an alias: `unit-test index-map-3d-api` and `unit-test index-map-3d-api -r` will run tests and generate reports respectively.
 
 ### Integration tests
 
@@ -111,7 +111,7 @@ make integrationtest
 
 This file gets added to the test-output folder. The test-output folder is created if doesn't exist.
 
-To run the integration tests if you are using the common dev-env you can run `docker-compose exec 3d-index-map-api make integrationtest` or, using the alias, `integration-test 3d-index-map-api`.
+To run the integration tests if you are using the common dev-env you can run `docker-compose exec index-map-3d-api make integrationtest` or, using the alias, `integration-test index-map-3d-api`.
 
 ## Application Framework implementation
 

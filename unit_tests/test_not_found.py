@@ -1,6 +1,6 @@
 import unittest
 
-from 3d_index_map_api.main import app
+from index_map_3d_api.main import app
 
 
 class TestNotFound(unittest.TestCase):
