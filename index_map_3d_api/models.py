@@ -4,8 +4,12 @@ import json
 
 class BAUnit(db.Model):
     __tablename__ = 'ba_unit'
+
+    # Fields
     id = db.Column(db.Integer, primary_key=True)
     spatial_unit_id = db.Column(db.String)
+
+    # Relationships
     interests = db.relationship("Interest", back_populates="ba_unit")
 
     def __init__(self, id, spatial_unit_id, interests=None):
@@ -26,11 +30,15 @@ class BAUnit(db.Model):
 
 class Interest(db.Model):
     __tablename__ = 'interest'
+
+    # Fields
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String)
     ba_unit_id = db.Column(db.Integer, db.ForeignKey('ba_unit.id'))
+
+    # Relationships
     ba_unit = db.relationship("BAUnit", back_populates="interests")
-    party = db.relationship("Party", back_populates="interests")
+    party = db.relationship("Party", back_populates="interests", uselist=False)
 
     def __init__(self, id, description, ba_unit_id, ba_unit, party):
         self.id = id
@@ -40,7 +48,7 @@ class Interest(db.Model):
         self.party = party
 
     def __repr__(self):
-        return json.dumps(self.as_dict())
+        return json.dumps(self.as_dict(), sort_keys=True, seperators=(',', ':'))
 
     def as_dict(self):
         return {
@@ -54,6 +62,8 @@ class Interest(db.Model):
 
 class Responsibility(db.Model):
     __tablename__ = 'responsibility'
+
+    # Fields
     id = db.Column(db.Integer, db.ForeignKey('interest.id'), primary_key=True)
     type = db.Column(db.String)
 
@@ -62,7 +72,7 @@ class Responsibility(db.Model):
         self.type = type
 
     def __repr__(self):
-        return json.dumps(self.as_dict())
+        return json.dumps(self.as_dict(), sort_keys=True, seperators=(',', ':'))
 
     def as_dict(self):
         return {
@@ -73,8 +83,12 @@ class Responsibility(db.Model):
 
 class Right(db.Model):
     __tablename__ = 'right'
+
+    # Fields
     id = db.Column(db.Integer, db.ForeignKey('interest.id'), primary_key=True)
     type = db.Column(db.String)
+
+    # Relationships
     mortgages = db.relationship("Mortgage", back_populates="rights")
 
     def __init__(self, id, type, mortgages):
@@ -83,7 +97,7 @@ class Right(db.Model):
         self.mortgages = mortgages
     
     def __repr__(self):
-        return json.dumps(self.as_dict())
+        return json.dumps(self.as_dict(), sort_keys=True, seperators=(',', ':'))
 
     def as_dict(self):
         return {
@@ -95,6 +109,8 @@ class Right(db.Model):
 
 class Restriction(db.Model):
     __tablename__ = 'restriction'
+
+    # Fields
     id = db.Column(db.Integer, db.ForeignKey('interest.id'), primary_key=True)
     type = db.Column(db.String)
     party_required = db.Column(db.Boolean)
@@ -105,7 +121,7 @@ class Restriction(db.Model):
         self.party_required = party_required
 
     def __repr__(self):
-        return json.dumps(self.as_dict())
+        return json.dumps(self.as_dict(), sort_keys=True, seperators=(',', ':'))
 
     def as_dict(self):
         return {
@@ -116,10 +132,14 @@ class Restriction(db.Model):
 
 class Mortgage(db.Model):
     __tablename__ = 'mortgage'
+
+    # Fields
     id = db.Column(db.Integer, db.ForeignKey('restriction.id'), primary_key=True)
     type = db.Column(db.String)
     amount = db.Column(db.Integer)
     interest_rate = db.Column(db.Float)
+
+    # Relationships
     rights = db.relationship("Right", back_populates="mortgages")
 
     def __init__(self, id, type, amount, interest_rate, rights):
@@ -130,7 +150,7 @@ class Mortgage(db.Model):
         self.rights = rights
     
     def __repr__(self):
-        return json.dumps(self.as_dict())
+        return json.dumps(self.as_dict(), sort_keys=True, seperators=(',', ':'))
 
     def as_dict(self):
         return {
@@ -144,19 +164,23 @@ class Mortgage(db.Model):
 
 class Party(db.Model):
     __tablename__ = 'party'
+
+    # Fields
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     type = db.Column(db.String)
+
+    # Relationships
     interests = db.relationship("Interest", back_populates="party")
 
     def __init__(self, id, name, type, interests):
         self.id = id
         self.name = name
         self.type = type
-        self.interests = interets
+        self.interests = interests
     
     def __repr__(self):
-        return json.dumps(self.as_dict())
+        return json.dumps(self.as_dict(), sort_keys=True, seperators=(',', ':'))
 
     def as_dict(self):
         return {

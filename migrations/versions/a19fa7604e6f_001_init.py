@@ -1,17 +1,16 @@
-"""Initial database structure
+"""001_init
 
-Revision ID: 6d90af1169bd
+Revision ID: a19fa7604e6f
 Revises: 
-Create Date: 2019-10-02 12:57:57.995714
+Create Date: 2019-10-02 15:08:03.494909
 
 """
 from alembic import op
 from flask import current_app
 import sqlalchemy as sa
 
-
 # revision identifiers, used by Alembic.
-revision = '6d90af1169bd'
+revision = 'a19fa7604e6f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -19,13 +18,13 @@ depends_on = None
 
 def upgrade():
     op.create_table('ba_unit',
-    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('spatial_unit_id', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
 
     op.create_table('party',
-    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('name', sa.String(), nullable=True),
     sa.Column('type', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
@@ -70,13 +69,10 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
 
-    op.execute("GRANT SELECT, INSERT ON ba_unit TO " + current_app.config.get("APP_SQL_USERNAME"))
-    op.execute("GRANT SELECT, INSERT ON party TO " + current_app.config.get("APP_SQL_USERNAME"))
-    op.execute("GRANT SELECT, INSERT ON interest TO " + current_app.config.get("APP_SQL_USERNAME"))
-    op.execute("GRANT SELECT, INSERT ON responsibility TO " + current_app.config.get("APP_SQL_USERNAME"))
-    op.execute("GRANT SELECT, INSERT ON restriction TO " + current_app.config.get("APP_SQL_USERNAME"))
-    op.execute('GRANT SELECT, INSERT ON "right" TO ' + current_app.config.get("APP_SQL_USERNAME"))
-    op.execute("GRANT SELECT, INSERT ON mortgage TO " + current_app.config.get("APP_SQL_USERNAME"))
+    op.execute("GRANT SELECT, INSERT ON TABLE \"ba_unit\", \"party\", \"interest\", \
+               \"responsibility\", \"right\", \"mortgage\" TO " + current_app.config.get("APP_SQL_USERNAME"))
+    op.execute("GRANT USAGE ON SEQUENCE \"ba_unit_id_seq\", \"party_id_seq\" TO " +
+                    current_app.config.get('APP_SQL_USERNAME'))
 
 
 def downgrade():
@@ -89,3 +85,4 @@ def downgrade():
     op.drop_table('party')
     op.drop_table('ba_unit')
     # ### end Alembic commands ###
+
