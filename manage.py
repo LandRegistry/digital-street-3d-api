@@ -2,13 +2,15 @@ import os
 
 from flask_script import Manager
 from index_map_3d_api.main import app
+from flask_migrate import Migrate, MigrateCommand
+from index_map_3d_api.models import *    # noqa
+from index_map_3d_api.extensions import db
 
-# Using Alembic?
-# See what extra lines are needed here:
-# http://git.dev.ctp.local/gadgets/gadget-api/blob/master/manage.py
+migrate = Migrate(app, db)
 
 manager = Manager(app)
 
+manager.add_command('db', MigrateCommand)
 
 @manager.command
 def runserver(port=9998):

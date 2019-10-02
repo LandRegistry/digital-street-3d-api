@@ -7,6 +7,29 @@ import os
 # app starting.
 # 3. This is the only file in the app where os.environ should be used.
 
+# --- Database variables start
+
+# These must all be set in the OS environment.
+# The password must be the correct one for either the app user or alembic user,
+# depending on which will be used (which is controlled by the SQL_USE_ALEMBIC_USER variable)
+
+SQL_HOST = os.environ['SQL_HOST']
+SQL_DATABASE = os.environ['SQL_DATABASE']
+SQL_PASSWORD = os.environ['SQL_PASSWORD']
+APP_SQL_USERNAME = os.environ['APP_SQL_USERNAME']
+ALEMBIC_SQL_USERNAME = os.environ['ALEMBIC_SQL_USERNAME']
+
+if os.environ['SQL_USE_ALEMBIC_USER'] == 'yes':
+    FINAL_SQL_USERNAME = ALEMBIC_SQL_USERNAME
+else:
+    FINAL_SQL_USERNAME = APP_SQL_USERNAME
+
+SQLALCHEMY_DATABASE_URI = 'postgres://{0}:{1}@{2}/{3}'.format(FINAL_SQL_USERNAME, SQL_PASSWORD, SQL_HOST, SQL_DATABASE)
+SQLALCHEMY_TRACK_MODIFICATIONS = False  # Explicitly set this in order to remove warning on run
+SQLALCHEMY_POOL_RECYCLE = int(os.environ['SQLALCHEMY_POOL_RECYCLE'])
+
+# --- Database variables end
+
 # For the enhanced logging extension
 FLASK_LOG_LEVEL = os.environ['LOG_LEVEL']
 
