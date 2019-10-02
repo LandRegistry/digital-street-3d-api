@@ -9,3 +9,6 @@ integrationtest:
 
 run:
 	python3 manage.py runserver
+
+db:
+	PGPASSWORD=superroot psql -h postgres -U root -d registerdb -f setup_db.sql;
