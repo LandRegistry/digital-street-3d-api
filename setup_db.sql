@@ -21,28 +21,28 @@ VALUES (1, 'Princesshay'),
        (29, 'Princesshay');
 
 INSERT INTO "ba_unit" (id, name)
-VALUES (1, 'Test'),
-       (2, 'Test'),
-       (3, 'Test'),
-       (4, 'Test'),
-       (5, 'Test'),
-       (6, 'Test'),
-       (7, 'Test'),
-       (8, 'Test'),
-       (9, 'Test'),
-       (10, 'Test'),
-       (11, 'Test'),
-       (12, 'Test'),
-       (13, 'Test'),
-       (14, 'Test'),
-       (15, 'Test'),
-       (16, 'Test'),
-       (17, 'Test'),
-       (18, 'Test'),
-       (19, 'Test'),
-       (20, 'Test');
+VALUES (1, 'ABCD123'),
+       (2, 'EFGH123'),
+       (3, 'IJKL123'),
+       (4, 'MNOP123'),
+       (5, 'QRST123'),
+       (6, 'UVWX123'),
+       (7, 'YZAB123'),
+       (8, 'DEFG123'),
+       (9, 'HIJK123'),
+       (10, 'CDEF123'),
+       (11, 'ABCD123'),
+       (12, 'YZAB123'),
+       (13, 'HIJK123'),
+       (14, 'CDEF123'),
+       (15, 'MNOP123'),
+       (16, 'QRST123'),
+       (17, 'UVWX123'),
+       (18, 'ABCD123'),
+       (19, 'ABCD123'),
+       (20, 'EFGH123');
 
-INSERT INTO "spatial_unit_ba_unit_mapping" (spatial_unit_id, ba_unit_id)
+INSERT INTO "spatial_unit_ba_unit_association" (spatial_unit_id, ba_unit_id)
 VALUES (1, 1),
        (2, 2),
        (3, 3),
@@ -64,55 +64,31 @@ VALUES (1, 1),
        (28, 19),
        (29, 20);
 
-INSERT INTO "interest" (id, description, ba_unit_id)
-VALUES (1, 'An interest', 1),
-       (2, 'An interest', 1),
-       (3, 'An interest', 1),
-       (4, 'An interest', 2),
-       (5, 'An interest', 3),
-       (6, 'An interest', 4),
-       (7, 'An interest', 5),
-       (8, 'An interest', 5),
-       (9, 'An interest', 6),
-       (10, 'An interest', 6),
-       (11, 'An interest', 7),
-       (12, 'An interest', 7),
-       (13, 'An interest', 8),
-       (14, 'An interest', 9),
-       (15, 'An interest', 10),
-       (16, 'An interest', 11),
-       (17, 'An interest', 12),
-       (18, 'An interest', 13),
-       (19, 'An interest', 13),
-       (20, 'An interest', 14),
-       (21, 'An interest', 15),
-       (22, 'An interest', 15),
-       (23, 'An interest', 16),
-       (24, 'An interest', 17),
-       (25, 'An interest', 18),
-       (26, 'An interest', 19),
-       (27, 'An interest', 20);
-
 INSERT INTO "party" (id, name, type)
-VALUES (1, 'Peter Morris', 'Individual');
+VALUES  (1, 'Peter Morris', 'Individual'),
+        (2, 'Alexandra Bailey', 'Individual'),
+        (3, 'Jack Farrell', 'Individual'),
+        (4, 'Jennifer Patterson', 'Individual'),
+        (5, 'Hollister Bank', 'Organisation'),
+        (6, 'Jacob Daniels', 'Individual');
 
-INSERT INTO "restriction" (id, interest_id, type, party_required)
-VALUES (1, 1, 'Mortgage', TRUE),
-       (2, 2, 'Easement', FALSE),
-       (3, 5, 'Mortgage', TRUE),
-       (4, 7, 'Mortgage', TRUE),
-       (5, 8, 'Mortgage', TRUE),
-       (6, 9, 'Easement', FALSE),
-       (7, 12, 'Mortgage', TRUE),
-       (8, 14, 'Mortgage', TRUE),
-       (9, 16, 'Mortgage', TRUE),
-       (10, 17, 'Mortgage', TRUE),
-       (11, 18, 'Mortgage', TRUE),
-       (12, 20, 'Easement', FALSE),
-       (13, 22, 'Mortgage', TRUE),
-       (14, 23, 'Mortgage', TRUE),
-       (15, 25, 'Easement', FALSE),
-       (16, 27, 'Mortgage', TRUE);
+INSERT INTO "restriction" (id, ba_unit_id, description, type, party_id)
+VALUES (1, 1, '', 'Mortgage', 1),
+       (2, 2, '', 'Easement', 3),
+       (3, 3, '', 'Mortgage', 2),
+       (4, 4, '', 'Mortgage', 5),
+       (5, 5, '', 'Mortgage', 6),
+       (6, 6, '', 'Easement', 4),
+       (7, 7, '', 'Mortgage', 2),
+       (8, 8, '', 'Mortgage', 5),
+       (9, 9, '', 'Mortgage', 3),
+       (10, 10, '', 'Mortgage', 1),
+       (11, 11, '', 'Mortgage', 4),
+       (12, 11, '', 'Easement', 4),
+       (13, 13, '', 'Mortgage', 2),
+       (14, 14, '', 'Mortgage', 3),
+       (15, 14, '', 'Easement', 1),
+       (16, 19, '', 'Mortgage', 3);
 
 INSERT INTO "mortgage" (id, restriction_id, type, amount, interest_rate)
 VALUES (1, 1, 'Fixed Rate Mortgage', 257000, 3.5),
@@ -128,26 +104,38 @@ VALUES (1, 1, 'Fixed Rate Mortgage', 257000, 3.5),
        (11, 14, 'Fixed Rate Mortgage', 521500, 3.3),
        (12, 16, 'Fixed Rate Mortgage', 415000, 4.3);
 
-INSERT INTO "right" (id, interest_id, type)
-VALUES (1, 3, 'Ownership'),
-       (2, 4, 'Ownership'),
-       (3, 6, 'Ownership'),
-       (4, 10, 'Ownership'),
-       (5, 13, 'Ownership'),
-       (6, 15, 'Ownership'),
-       (7, 19, 'Ownership'),
-       (8, 21, 'Ownership'),
-       (9, 24, 'Ownership'),
-       (10, 26, 'Ownership');
+INSERT INTO "right" (id, ba_unit_id, description, type, party_id)
+VALUES (1, 1, 'Absolute Freehold', 'Ownership', 1),
+       (2, 2, 'Absolute Freehold', 'Ownership', 1),
+       (3, 3, 'Leasehold', 'Ownership', 2),
+       (4, 4, 'Leasehold', 'Ownership', 2),
+       (5, 5, 'Leasehold', 'Ownership', 2),
+       (6, 6, 'Leasehold', 'Ownership', 4),
+       (7, 7, 'Leasehold', 'Ownership', 3),
+       (8, 8, 'Leasehold', 'Ownership', 3),
+       (9, 9, 'Leasehold', 'Ownership', 6),
+       (10, 10, 'Leasehold', 'Ownership', 6),
+       (11, 11, 'Absolute Freehold', 'Ownership', 1),
+       (12, 12, 'Leasehold', 'Ownership', 3),
+       (13, 13, 'Leasehold', 'Ownership', 3),
+       (14, 14, 'Leasehold', 'Ownership', 3),
+       (15, 15, 'Leasehold', 'Ownership', 6),
+       (16, 16, 'Leasehold', 'Ownership', 4),
+       (17, 17, 'Leasehold', 'Ownership', 4),
+       (18, 18, 'Absolute Freehold', 'Ownership', 1),
+       (19, 19, 'Absolute Freehold', 'Ownership', 1),
+       (20, 20, 'Leasehold', 'Ownership', 4);
 
-INSERT INTO "responsibility" (id, interest_id, type)
-VALUES (1, 11, 'Monument maintenance');
+INSERT INTO "responsibility" (id, ba_unit_id, description, type, party_id)
+VALUES (1, 7, '', 'Monument maintenance', 4),
+       (2, 11, '', 'Building maintenance', 2),
+       (3, 12, '', 'Building maintenance', 3),
+       (4, 15, '', 'Building maintenance', 6);
 
 
-ALTER SEQUENCE "ba_unit_id_seq" RESTART WITH 21;
-ALTER SEQUENCE "interest_id_seq" RESTART WITH 28;
-ALTER SEQUENCE "party_id_seq" RESTART WITH 2;
+ALTER SEQUENCE "ba_unit_id_seq" RESTART WITH 21; 
+ALTER SEQUENCE "party_id_seq" RESTART WITH 7;
 ALTER SEQUENCE "restriction_id_seq" RESTART WITH 17;
 ALTER SEQUENCE "mortgage_id_seq" RESTART WITH 13;
-ALTER SEQUENCE "right_id_seq" RESTART WITH 11;
-ALTER SEQUENCE "responsibility_id_seq" RESTART WITH 2;
+ALTER SEQUENCE "right_id_seq" RESTART WITH 21;
+ALTER SEQUENCE "responsibility_id_seq" RESTART WITH 5;
