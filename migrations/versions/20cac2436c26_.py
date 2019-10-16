@@ -1,8 +1,8 @@
-"""001_init
+"""empty message
 
-Revision ID: 7cc343474a33
+Revision ID: 20cac2436c26
 Revises: 
-Create Date: 2019-10-09 14:37:17.124079
+Create Date: 2019-10-15 10:48:31.167649
 
 """
 from alembic import op
@@ -11,7 +11,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7cc343474a33'
+revision = '20cac2436c26'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,41 +35,42 @@ def upgrade():
     sa.Column('address', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('interest',
+    op.create_table('responsibility',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('description', sa.String(), nullable=True),
     sa.Column('ba_unit_id', sa.Integer(), nullable=False),
+    sa.Column('type', sa.String(), nullable=True),
+    sa.Column('party_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['ba_unit_id'], ['ba_unit.id'], ),
+    sa.ForeignKeyConstraint(['party_id'], ['party.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('spatial_unit_ba_unit_mapping',
+    op.create_table('restriction',
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('description', sa.String(), nullable=True),
+    sa.Column('type', sa.String(), nullable=True),
+    sa.Column('ba_unit_id', sa.Integer(), nullable=False),
+    sa.Column('party_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['ba_unit_id'], ['ba_unit.id'], ),
+    sa.ForeignKeyConstraint(['party_id'], ['party.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('right',
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('description', sa.String(), nullable=True),
+    sa.Column('type', sa.String(), nullable=True),
+    sa.Column('ba_unit_id', sa.Integer(), nullable=False),
+    sa.Column('party_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['ba_unit_id'], ['ba_unit.id'], ),
+    sa.ForeignKeyConstraint(['party_id'], ['party.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('spatial_unit_ba_unit_association',
     sa.Column('spatial_unit_id', sa.Integer(), nullable=False),
     sa.Column('ba_unit_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['ba_unit_id'], ['ba_unit.id'], ),
     sa.ForeignKeyConstraint(['spatial_unit_id'], ['spatial_unit.id'], ),
     sa.PrimaryKeyConstraint('spatial_unit_id', 'ba_unit_id')
-    )
-    op.create_table('responsibility',
-    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
-    sa.Column('interest_id', sa.Integer(), nullable=True),
-    sa.Column('type', sa.String(), nullable=True),
-    sa.ForeignKeyConstraint(['interest_id'], ['interest.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.create_table('restriction',
-    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
-    sa.Column('interest_id', sa.Integer(), nullable=True),
-    sa.Column('type', sa.String(), nullable=True),
-    sa.Column('party_required', sa.Boolean(), nullable=True),
-    sa.ForeignKeyConstraint(['interest_id'], ['interest.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.create_table('right',
-    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
-    sa.Column('interest_id', sa.Integer(), nullable=True),
-    sa.Column('type', sa.String(), nullable=True),
-    sa.ForeignKeyConstraint(['interest_id'], ['interest.id'], ),
-    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('mortgage',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
@@ -80,7 +81,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['restriction_id'], ['restriction.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('mortgage_right_mapping',
+    op.create_table('mortgage_right_association',
     sa.Column('mortgage_id', sa.Integer(), nullable=False),
     sa.Column('right_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['mortgage_id'], ['mortgage.id'], ),
@@ -89,22 +90,21 @@ def upgrade():
     )
     # ### end Alembic commands ###
 
-    op.execute("GRANT SELECT, INSERT ON TABLE \"spatial_unit\", \"ba_unit\", \"party\", \"interest\", \
-               \"responsibility\", \"right\", \"mortgage\", \"spatial_unit_ba_unit_mapping\", \
-               \"mortgage_right_mapping\" TO " + current_app.config.get("APP_SQL_USERNAME"))
+    op.execute("GRANT SELECT, INSERT ON TABLE \"spatial_unit\", \"ba_unit\", \"party\",  \"responsibility\", \
+               \"right\", \"restriction\", \"mortgage\", \"spatial_unit_ba_unit_association\", \
+               \"mortgage_right_association\" TO " + current_app.config.get("APP_SQL_USERNAME"))
     op.execute("GRANT USAGE ON SEQUENCE \"ba_unit_id_seq\", \"right_id_seq\", \"responsibility_id_seq\", \
-               \"restriction_id_seq\", \"party_id_seq\", \"interest_id_seq\" TO " + 
-               current_app.config.get('APP_SQL_USERNAME'))
+               \"restriction_id_seq\", \"party_id_seq\" TO " + current_app.config.get('APP_SQL_USERNAME'))
+
 
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
-    op.drop_table('mortgage_right_mapping')
+    op.drop_table('mortgage_right_association')
     op.drop_table('mortgage')
+    op.drop_table('spatial_unit_ba_unit_association')
     op.drop_table('right')
     op.drop_table('restriction')
     op.drop_table('responsibility')
-    op.drop_table('spatial_unit_ba_unit_mapping')
-    op.drop_table('interest')
     op.drop_table('spatial_unit')
     op.drop_table('party')
     op.drop_table('ba_unit')
