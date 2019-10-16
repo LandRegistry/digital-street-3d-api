@@ -53,12 +53,6 @@ class BAUnit(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String)
 
-    # Relationships
-    # interests = db.relationship("Interest", back_populates="ba_unit")
-    # rights = db.relationship("Right", back_populates="ba_unit")
-    # restrictions = db.relationship("Restriction", back_populates="ba_unit")
-    # responsibilities = db.relationship("Responsibility", back_populates="ba_unit")
-
     def __init__(self, id, name):
         self.id = id
         self.name = name
@@ -213,7 +207,7 @@ class Restriction(db.Model):
             "party": self.party.as_dict() if self.party else None
         }
 
-# REMOVE
+# TODO - Remove?
 class Mortgage(db.Model):
     __tablename__ = 'mortgage'
 
