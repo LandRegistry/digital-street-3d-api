@@ -36,6 +36,7 @@ class SpatialUnit(db.Model):
         result =  {
             "id": self.id,
             "address": self.address,
+            "price_paid": [price_paid.as_dict() for price_paid in self.prices_paid],
         }
 
         embeddable_objects = ['ba_units']
@@ -206,6 +207,33 @@ class Restriction(db.Model):
             "type": self.type,
             "party": self.party.as_dict() if self.party else None
         }
+
+
+class PricePaid(db.Model):
+    __tablename__ = 'price_paid'
+
+    # Fields
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    spatial_unit_id = db.Column(db.Integer, db.ForeignKey('spatial_unit.id'))
+    amount = db.Column(db.Integer)
+
+    # Relationships
+    spatial_unit = db.relationship("SpatialUnit", backref=db.backref('prices_paid', lazy='dynamic'), uselist=False)
+
+    def __init__(self, id, spatial_unit, amount):
+        self.id = id
+        self.spatial_unit = spatial_unit
+        self.amount = amount
+    
+    def __repr__(self):
+        return json.dumps(self.as_dict(), sort_keys=True, seperators=(',', ':'))
+    
+    def as_dict(self):
+        return {
+            "price_paid_id": self.id,
+            "amount": self.amount
+        }
+
 
 # TODO - Remove?
 class Mortgage(db.Model):

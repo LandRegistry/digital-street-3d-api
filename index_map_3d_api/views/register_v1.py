@@ -1,7 +1,7 @@
 from flask import Blueprint, Response, current_app, request
 from sqlalchemy import exc
 from index_map_3d_api.exceptions import ApplicationError
-from index_map_3d_api.models import SpatialUnit, BAUnit, Party, Restriction, Responsibility, Right, Mortgage
+from index_map_3d_api.models import SpatialUnit, BAUnit, Party, Restriction, Responsibility, Right
 from flask_negotiate import consumes, produces
 import json
 
@@ -97,21 +97,21 @@ def get_responsibilities():
                     status=200)
 
 
-@register_v1.route("/mortgages", methods=["GET"])
-@produces("application/json")
-def get_mortgages():
-    """Get a list of all Mortgages."""
+# @register_v1.route("/mortgages", methods=["GET"])
+# @produces("application/json")
+# def get_mortgages():
+#     """Get a list of all Mortgages."""
 
-    results = []
+#     results = []
 
-    query_result = Mortgage.query.all()
+#     query_result = Mortgage.query.all()
 
-    for item in query_result:
-        results.append(item.as_dict())
+#     for item in query_result:
+#         results.append(item.as_dict())
 
-    return Response(response=json.dumps(results, sort_keys=True, separators=(',', ':')),
-                    mimetype='application/json',
-                    status=200)
+#     return Response(response=json.dumps(results, sort_keys=True, separators=(',', ':')),
+#                     mimetype='application/json',
+#                     status=200)
 
 
 @register_v1.route("/parties", methods=["GET"])
