@@ -97,23 +97,6 @@ def get_responsibilities():
                     status=200)
 
 
-# @register_v1.route("/mortgages", methods=["GET"])
-# @produces("application/json")
-# def get_mortgages():
-#     """Get a list of all Mortgages."""
-
-#     results = []
-
-#     query_result = Mortgage.query.all()
-
-#     for item in query_result:
-#         results.append(item.as_dict())
-
-#     return Response(response=json.dumps(results, sort_keys=True, separators=(',', ':')),
-#                     mimetype='application/json',
-#                     status=200)
-
-
 @register_v1.route("/parties", methods=["GET"])
 @produces("application/json")
 def get_parties():

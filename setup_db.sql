@@ -14,13 +14,16 @@ VALUES (1, 'ABCD123'),
        (5, 'QRST123'),
        (6, 'UVWX123');
 
-INSERT INTO "price_paid" (id, spatial_unit_id, amount)
-VALUES (1, 1, 1000000),
-       (2, 2, 100000),
-       (3, 3, 115000),
-       (4, 4, 125000),
-       (5, 5, 150000),
-       (6, 6, 200000);
+INSERT INTO "price_paid" (id, spatial_unit_id, amount, date)
+VALUES (1, 1, 500000, DATE '2006-10-05'),
+       (2, 2, 105000, DATE '2008-01-18'),
+       (3, 1, 1000000, DATE '2009-12-03'),
+       (4, 5, 140000, DATE '2010-04-01'),
+       (5, 4, 139000, DATE '2010-11-21'),
+       (6, 2, 104000, DATE '2011-06-13'),
+       (7, 2, 153000, DATE '2013-05-08'),
+       (8, 3, 145000, DATE '2016-02-26'),
+       (9, 6, 200000, DATE '2019-03-15');
 
 INSERT INTO "spatial_unit_ba_unit_association" (spatial_unit_id, ba_unit_id)
 VALUES (1, 1),
@@ -53,12 +56,12 @@ VALUES (1, 1, '', 'Mortgage', 8),
        (8, 6, '', 'Mortgage', 9);
 
 INSERT INTO "right" (id, ba_unit_id, description, type, party_id)
-VALUES (1, 1, 'Absolute Freehold', 'Ownership of the land, its subsoil and airspace', 1),
-       (2, 2, 'Leasehold', 'Ownership of entire flat', 2),
-       (3, 3, 'Leasehold', 'Ownership of entire flat', 3),
-       (4, 4, 'Leasehold', 'Ownership of entire flat', 4),
-       (5, 5, 'Leasehold', 'Ownership of entire flat', 6),
-       (6, 6, 'Leasehold', 'Ownership of the airspace above the building, rising 15 metres vertically from the outer edge of the building', 7);
+VALUES (1, 1, 'Ownership of the land, its subsoil and airspace', 'Absolute Freehold', 1),
+       (2, 2, 'Ownership of entire flat', 'Leasehold', 2),
+       (3, 3, 'Ownership of entire flat', 'Leasehold', 3),
+       (4, 4, 'Ownership of entire flat', 'Leasehold', 4),
+       (5, 5, 'Ownership of entire flat', 'Leasehold', 6),
+       (6, 6, 'Ownership of the airspace above the building, rising 15 metres vertically from the outer edge and flat roof of the building', 'Leasehold', 7);
 
 INSERT INTO "responsibility" (id, ba_unit_id, description, type, party_id)
 VALUES (1, 1, '', 'Building maintenance', 1),
@@ -71,8 +74,8 @@ VALUES (1, 1, '', 'Building maintenance', 1),
 
 
 ALTER SEQUENCE "ba_unit_id_seq" RESTART WITH 7; 
+ALTER SEQUENCE "price_paid_id_seq" RESTART WITH 10;
 ALTER SEQUENCE "party_id_seq" RESTART WITH 11;
 ALTER SEQUENCE "restriction_id_seq" RESTART WITH 9;
-ALTER SEQUENCE "mortgage_id_seq" RESTART WITH 8;
 ALTER SEQUENCE "right_id_seq" RESTART WITH 7;
 ALTER SEQUENCE "responsibility_id_seq" RESTART WITH 7;
