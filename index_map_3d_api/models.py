@@ -8,11 +8,6 @@ spatial_unit_ba_unit_association = db.Table('spatial_unit_ba_unit_association',
     db.Column('ba_unit_id', db.Integer, db.ForeignKey('ba_unit.id'), primary_key="True")
 )
 
-mortgage_right_association = db.Table('mortgage_right_association',
-    db.Column('mortgage_id', db.Integer, db.ForeignKey('mortgage.id'), primary_key="True"),
-    db.Column('right_id', db.Integer, db.ForeignKey('right.id'), primary_key="True")
-)
-
 # Models
 class SpatialUnit(db.Model):
     __tablename__ = 'spatial_unit'
@@ -36,6 +31,7 @@ class SpatialUnit(db.Model):
         result =  {
             "id": self.id,
             "address": self.address,
+            "price_paid": [price_paid.as_dict() for price_paid in self.prices_paid],
         }
 
         embeddable_objects = ['ba_units']
@@ -135,19 +131,15 @@ class Right(db.Model):
     ba_unit_id = db.Column(db.Integer, db.ForeignKey('ba_unit.id'), nullable=False)
     party_id = db.Column(db.Integer, db.ForeignKey('party.id'), nullable=True)
 
-
     # Relationships
     ba_unit = db.relationship("BAUnit", backref=db.backref('rights', lazy='dynamic'), uselist=False)
-    mortgages = db.relationship("Mortgage", secondary=mortgage_right_association, lazy='subquery',
-        backref=db.backref('rights', lazy=True))
     party = db.relationship("Party", back_populates="rights")
 
-    def __init__(self, id, ba_unit, description, type, mortgages, party=None):
+    def __init__(self, id, ba_unit, description, type, party=None):
         self.id = id
         self.ba_unit = ba_unit
         self.description = description
         self.type = type
-        self.mortgages = mortgages
         self.party = party
     
     def __repr__(self):
@@ -162,14 +154,10 @@ class Right(db.Model):
         }
 
         embeddable_objects = ['ba_unit']
-        embeddable_lists = ['mortgages']
         
         for object_name in embeddable_objects:
             if object_name in embed:
                 result[object_name] = getattr(self, object_name).as_dict()
-        for list_name in embeddable_lists:
-            if list_name in embed:
-                result[list_name] = [item.as_dict() for item in getattr(self, list_name)]
 
         return result
 
@@ -207,42 +195,34 @@ class Restriction(db.Model):
             "party": self.party.as_dict() if self.party else None
         }
 
-# TODO - Remove?
-class Mortgage(db.Model):
-    __tablename__ = 'mortgage'
+
+class PricePaid(db.Model):
+    __tablename__ = 'price_paid'
 
     # Fields
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    restriction_id = db.Column(db.Integer, db.ForeignKey('restriction.id'))
-    type = db.Column(db.String)
+    spatial_unit_id = db.Column(db.Integer, db.ForeignKey('spatial_unit.id'))
     amount = db.Column(db.Integer)
-    interest_rate = db.Column(db.Float)
+    date = db.Column(db.DateTime)
 
     # Relationships
-    restriction = db.relationship("Restriction", backref=db.backref('mortgages', lazy='dynamic'), uselist=False)
+    spatial_unit = db.relationship("SpatialUnit", backref=db.backref('prices_paid', lazy='dynamic'), uselist=False)
 
-    def __init__(self, id, restriction, type, amount, interest_rate):
+    def __init__(self, id, spatial_unit, amount, date):
         self.id = id
-        self.restriction = restriction
-        self.type = type
+        self.spatial_unit = spatial_unit
         self.amount = amount
-        self.interest_rate = interest_rate
+        self.date = date
     
     def __repr__(self):
         return json.dumps(self.as_dict(), sort_keys=True, seperators=(',', ':'))
-
-    def as_dict(self, embed=[]):
-        result = {
-            "mortgage_id": self.id,
-            "type": self.type,
-            "amount": self.amount,
-            "interest_rate": self.interest_rate
+    
+    def as_dict(self):
+        return {
+            "price_paid_id": self.id,
+            "amount": "£{:0,}".format(self.amount),
+            "date": self.date.strftime("%d/%m/%Y")
         }
-
-        embeddable_objects = ['']
-        for object_name in embeddable_objects:
-            if object_name in embed:
-                result[object_name] = getattr(self, object_name).as_dict()
 
 
 class Party(db.Model):
