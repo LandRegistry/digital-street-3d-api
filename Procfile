@@ -1,0 +1,1 @@
+web: gunicorn index_map_3d_api.main:app --log-file -
