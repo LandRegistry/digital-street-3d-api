@@ -45,32 +45,32 @@ VALUES  (1, 'Peter Morris', 'Individual'),
         (9, 'Royal Bank', 'Organisation'),
         (10, 'Western Bank', 'Organisation');
 
-INSERT INTO "restriction" (id, ba_unit_id, description, type, party_id)
-VALUES (1, 1, '', 'Mortgage', 8),
-       (2, 2, '', 'Easement', 3),
-       (3, 2, '', 'Mortgage', 9),
-       (4, 3, '', 'Mortgage', 5),
-       (5, 4, '', 'Mortgage', 5),
-       (6, 5, '', 'Mortgage', 10),
-       (7, 5, '', 'Easement', 7),
-       (8, 6, '', 'Mortgage', 9);
+INSERT INTO "restriction" (id, ba_unit_id, description, type, party_id, start_date, end_date)
+VALUES (1, 1, '', 'Mortgage', 8, '2006-10-05', '2041-10-05'),
+       (2, 2, '', 'Easement', 3, NULL, NULL),
+       (3, 2, '', 'Mortgage', 9, '2008-01-18', '2033-01-18'),
+       (4, 3, '', 'Mortgage', 5, '2016-02-26', '2036-02-26'),
+       (5, 4, '', 'Mortgage', 5, '2010-11-21', '2040-11-21'),
+       (6, 5, '', 'Mortgage', 10, '2010-04-01', '2035-04-01'),
+       (7, 5, '', 'Easement', 7, NULL, NULL),
+       (8, 6, '', 'Mortgage', 9, '2019-03-15', '2034-03-15');
 
-INSERT INTO "right" (id, ba_unit_id, description, type, party_id)
-VALUES (1, 1, 'Ownership of the land, its subsoil and airspace', 'Absolute Freehold', 1),
-       (2, 2, 'Ownership of entire flat', 'Leasehold', 2),
-       (3, 3, 'Ownership of entire flat', 'Leasehold', 3),
-       (4, 4, 'Ownership of entire flat', 'Leasehold', 4),
-       (5, 5, 'Ownership of entire flat', 'Leasehold', 6),
-       (6, 6, 'Ownership of the airspace above the building, rising 15 metres vertically from the outer edge and flat roof of the building', 'Leasehold', 7);
+INSERT INTO "right" (id, ba_unit_id, description, type, party_id, start_date, end_date)
+VALUES (1, 1, 'Ownership of the land, its subsoil and airspace', 'Absolute Freehold', 1, '2006-10-05', '2041-10-05'),
+       (2, 2, 'Ownership of entire flat', 'Leasehold', 2, '2008-01-18', '2128-01-18'),
+       (3, 3, 'Ownership of entire flat', 'Leasehold', 3, '2016-02-26', '2136-02-26'),
+       (4, 4, 'Ownership of entire flat', 'Leasehold', 4, '2010-11-21', '2130-11-21'),
+       (5, 5, 'Ownership of entire flat', 'Leasehold', 6, '2010-04-01', '2145-04-01'),
+       (6, 6, 'Ownership of the airspace above the building, rising 15 metres vertically from the outer edge and flat roof of the building', 'Airspace Leasehold', 7, '2019-03-15', '2139-03-15');
 
-INSERT INTO "responsibility" (id, ba_unit_id, description, type, party_id)
-VALUES (1, 1, '', 'Building maintenance', 1),
-       (2, 1, '', 'Monument maintenance', 1),
-       (3, 2, '', 'Building maintenance', 2),
-       (4, 3, '', 'Building maintenance', 3),
-       (5, 4, '', 'Building maintenance', 4),
-       (6, 5, '', 'Building maintenance', 6),
-       (7, 6, '', 'Building maintenance', 7);
+INSERT INTO "responsibility" (id, ba_unit_id, description, type, party_id, start_date, end_date)
+VALUES (1, 1, '', 'Building maintenance', 1, NULL, NULL),
+       (2, 1, '', 'Monument maintenance', 1, NULL, NULL),
+       (3, 2, '', 'Building maintenance', 2, NULL, NULL),
+       (4, 3, '', 'Building maintenance', 3, NULL, NULL),
+       (5, 4, '', 'Building maintenance', 4, NULL, NULL),
+       (6, 5, '', 'Building maintenance', 6, NULL, NULL),
+       (7, 6, '', 'Building maintenance', 7, NULL, NULL);
 
 
 ALTER SEQUENCE "ba_unit_id_seq" RESTART WITH 7; 

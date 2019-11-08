@@ -88,18 +88,22 @@ class Responsibility(db.Model):
     ba_unit_id = db.Column(db.Integer, db.ForeignKey('ba_unit.id'), nullable=False)
     type = db.Column(db.String)
     party_id = db.Column(db.Integer, db.ForeignKey('party.id'), nullable=True)
+    start_date = db.Column(db.DateTime, nullable=True)
+    end_date = db.Column(db.DateTime, nullable=True)
 
     # Relationships
     ba_unit = db.relationship("BAUnit", backref=db.backref('responsibilities', lazy='dynamic'), uselist=False)
     party = db.relationship("Party", back_populates="responsibilities")
 
 
-    def __init__(self, id, ba_unit, description, interest, type, party=None):
+    def __init__(self, id, ba_unit, description, interest, type, party=None, start_date=None, end_date=None):
         self.id = id
         self.ba_unit = ba_unit
         self.description = description
         self.type = type
         self.party = party
+        self.start_date = start_date
+        self.end_date = end_date
 
     def __repr__(self):
         return json.dumps(self.as_dict(), sort_keys=True, seperators=(',', ':'))
@@ -109,7 +113,9 @@ class Responsibility(db.Model):
             "responsibility_id": self.id,
             "description": self.description,
             "type": self.type,
-            "party": self.party.as_dict() if self.party else None
+            "party": self.party.as_dict() if self.party else None,
+            "start_date": self.start_date.strftime("%d/%m/%Y") if self.start_date else None,
+            "end_date": self.end_date.strftime("%d/%m/%Y") if self.end_date else None
         }
 
         embeddable_objects = ['ba_unit']
@@ -130,17 +136,21 @@ class Right(db.Model):
     type = db.Column(db.String)
     ba_unit_id = db.Column(db.Integer, db.ForeignKey('ba_unit.id'), nullable=False)
     party_id = db.Column(db.Integer, db.ForeignKey('party.id'), nullable=True)
+    start_date = db.Column(db.DateTime, nullable=True)
+    end_date = db.Column(db.DateTime, nullable=True)
 
     # Relationships
     ba_unit = db.relationship("BAUnit", backref=db.backref('rights', lazy='dynamic'), uselist=False)
     party = db.relationship("Party", back_populates="rights")
 
-    def __init__(self, id, ba_unit, description, type, party=None):
+    def __init__(self, id, ba_unit, description, type, party=None, start_date=None, end_date=None):
         self.id = id
         self.ba_unit = ba_unit
         self.description = description
         self.type = type
         self.party = party
+        self.start_date = start_date
+        self.end_date = end_date
     
     def __repr__(self):
         return json.dumps(self.as_dict(), sort_keys=True, seperators=(',', ':'))
@@ -150,7 +160,9 @@ class Right(db.Model):
             "right_id": self.id,
             "description": self.description,
             "type": self.type,
-            "party": self.party.as_dict() if self.party else None
+            "party": self.party.as_dict() if self.party else None,
+            "start_date": self.start_date.strftime("%d/%m/%Y") if self.start_date else None,
+            "end_date": self.end_date.strftime("%d/%m/%Y") if self.end_date else None
         }
 
         embeddable_objects = ['ba_unit']
@@ -171,18 +183,21 @@ class Restriction(db.Model):
     type = db.Column(db.String)
     ba_unit_id = db.Column(db.Integer, db.ForeignKey('ba_unit.id'), nullable=False)
     party_id = db.Column(db.Integer, db.ForeignKey('party.id'), nullable=True)
-    # party_required = db.Column(db.Boolean) # REMOVE
+    start_date = db.Column(db.DateTime, nullable=True)
+    end_date = db.Column(db.DateTime, nullable=True)
 
     # Relationships 
     ba_unit = db.relationship("BAUnit", backref=db.backref('restrictions', lazy='dynamic'), uselist=False)
     party = db.relationship("Party", back_populates="restrictions")
 
-    def __init__(self, id, ba_unit, description, type, party=None):
+    def __init__(self, id, ba_unit, description, type, party=None, start_date=None, end_date=None):
         self.id = id
         self.ba_unit = ba_unit
         self.description = description
         self.type = type
         self.party = party
+        self.start_date = start_date
+        self.end_date = end_date
 
     def __repr__(self):
         return json.dumps(self.as_dict(), sort_keys=True, seperators=(',', ':'))
@@ -192,7 +207,9 @@ class Restriction(db.Model):
             "restriction_id": self.id,
             "description": self.description,
             "type": self.type,
-            "party": self.party.as_dict() if self.party else None
+            "party": self.party.as_dict() if self.party else None,
+            "start_date": self.start_date.strftime("%d/%m/%Y") if self.start_date else None,
+            "end_date": self.end_date.strftime("%d/%m/%Y") if self.end_date else None
         }
 
 
