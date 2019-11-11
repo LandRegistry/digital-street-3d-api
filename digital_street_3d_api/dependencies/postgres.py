@@ -1,6 +1,6 @@
 from flask import current_app
 import psycopg2
-from index_map_3d_api.exceptions import ApplicationError
+from digital_street_3d_api.exceptions import ApplicationError
 
 def get_current_timestamp():
     try:

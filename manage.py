@@ -1,10 +1,10 @@
 import os
 
 from flask_script import Manager
-from index_map_3d_api.main import app
+from digital_street_3d_api.main import app
 from flask_migrate import Migrate, MigrateCommand
-from index_map_3d_api.models import *    # noqa
-from index_map_3d_api.extensions import db
+from digital_street_3d_api.models import *    # noqa
+from digital_street_3d_api.extensions import db
 
 migrate = Migrate(app, db)
 

@@ -1,6 +1,6 @@
 import unittest
 
-from index_map_3d_api.main import app
+from digital_street_3d_api.main import app
 
 
 class TestHealth(unittest.TestCase):

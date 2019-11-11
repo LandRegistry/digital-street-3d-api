@@ -1,7 +1,7 @@
 from flask import Blueprint, Response, current_app, request
 from sqlalchemy import exc
-from index_map_3d_api.exceptions import ApplicationError
-from index_map_3d_api.models import SpatialUnit, BAUnit, Party, Restriction, Responsibility, Right
+from digital_street_3d_api.exceptions import ApplicationError
+from digital_street_3d_api.models import SpatialUnit, BAUnit, Party, Restriction, Responsibility, Right
 from flask_negotiate import consumes, produces
 import json
 

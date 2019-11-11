@@ -1,4 +1,4 @@
-from index_map_3d_api.extensions import db
+from digital_street_3d_api.extensions import db
 import json
 
 

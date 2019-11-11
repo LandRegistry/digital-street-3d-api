@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from index_map_3d_api.custom_extensions.enhanced_logging.main import EnhancedLogging
+from digital_street_3d_api.custom_extensions.enhanced_logging.main import EnhancedLogging
 import logging
 import json
 import traceback

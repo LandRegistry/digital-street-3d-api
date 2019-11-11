@@ -1,9 +1,9 @@
 # This file is the entry point.
 # First we import the app object, which will get initialised as we do it. Then import methods we're about to use.
-from index_map_3d_api.app import app
-from index_map_3d_api.blueprints import register_blueprints
-from index_map_3d_api.exceptions import register_exception_handlers
-from index_map_3d_api.extensions import register_extensions
+from digital_street_3d_api.app import app
+from digital_street_3d_api.blueprints import register_blueprints
+from digital_street_3d_api.exceptions import register_exception_handlers
+from digital_street_3d_api.extensions import register_extensions
 
 # Now we register any extensions we use into the app
 register_extensions(app)

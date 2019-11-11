@@ -25,7 +25,7 @@ ENV SQL_HOST=postgres \
 # Put your app-specific stuff here (extra yum installs etc).
 # Any unique environment variables your config.py needs should also be added as ENV entries here
 
-ENV APP_NAME="index-map-3d-api" \
+ENV APP_NAME="digital-street-3d-api" \
  MAX_HEALTH_CASCADE="6" \
  LOG_LEVEL="DEBUG" \
  DEFAULT_TIMEOUT="30"
