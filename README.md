@@ -24,3 +24,12 @@ make db
 ```
 
 To view the test data, connect via psql: `psql registerdb`
+
+## Updating Postgres on Heroku
+
+First, reset the database using Heroku's Postgres plug-in, then enter the following commands into the Heroku app's bash console:
+
+```shell
+export SQL_USE_ALEMBIC_USER=yes && export SQL_PASSWORD={PG_PASSWORD} && python3 manage.py db upgrade
+PGPASSWORD={PG_PASSWORD} psql -h {PG_HOSTNAME} -U {PG_USERNAME} -d {PG_DATABASE_NAME} -f setup_db.sql;
+```
